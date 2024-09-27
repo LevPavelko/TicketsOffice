@@ -30,6 +30,7 @@ public class Ticket {
 
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
 

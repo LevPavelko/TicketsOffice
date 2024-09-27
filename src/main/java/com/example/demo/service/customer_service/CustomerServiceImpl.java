@@ -9,6 +9,7 @@ import com.example.demo.model.Customer;
 import com.example.demo.model.Event;
 import com.example.demo.model.Place;
 import com.example.demo.model.Ticket;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,6 @@ public class CustomerServiceImpl implements CustomerService {
     private ConvertToEntity convertToEntity;
     @Autowired
     private ConvertToDTO convertToDTO;
-
-
-
 
 
     @Override
@@ -57,10 +55,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDTO> findAll() {
-        List<Customer> customers = customerRepository.findAll();
+
+        List<Customer> customers = customerRepository.findAllWithTickets();
         return customers.stream()
                 .map(convertToDTO::convertCustomerToDTO)
                 .collect(Collectors.toList());
+
 
     }
 }
