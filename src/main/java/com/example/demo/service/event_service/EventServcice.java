@@ -1,15 +1,15 @@
 package com.example.demo.service.event_service;
 
-import com.example.demo.model.Customer;
+import com.example.demo.dto.EventDTO;
 import com.example.demo.model.Event;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EventServcice {
-    void save(Event event);
-    void update(Event event);
-    void delete(Event event);
-    Optional<Event> findById(int id);
-    List<Event> findAll();
+    void save(EventDTO event);
+    void update(EventDTO event);
+    void delete(EventDTO event);
+    Optional<EventDTO> findById(int id);
+    List<EventDTO> findAll();
 }
