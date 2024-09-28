@@ -33,7 +33,8 @@ public class ConvertToEntity {
         return customer;
     } //done
 
-    private Ticket convertTicketDTOToEntity(TicketDTO ticketDTO) {
+
+    public Ticket convertTicketDTOToEntity(TicketDTO ticketDTO) {
         Ticket ticket = new Ticket();
         ticket.setId(ticketDTO.getId());
         ticket.setCost(ticketDTO.getCost());
@@ -44,7 +45,7 @@ public class ConvertToEntity {
         return ticket;
     } //done
 
-    private Place convertPlaceDTOToEntity(PlaceDTO placeDTO) {
+    public Place convertPlaceDTOToEntity(PlaceDTO placeDTO) {
         Place place = new Place();
         place.setId(placeDTO.getId());
         place.setName(placeDTO.getName());
@@ -52,7 +53,7 @@ public class ConvertToEntity {
         return place;
     } //done
 
-    private Event convertEventDTOToEntity(EventDTO eventDTO) {
+    public Event convertEventDTOToEntity(EventDTO eventDTO) {
         Event event = new Event();
         event.setId(eventDTO.getId());
         event.setName(eventDTO.getName());

@@ -8,6 +8,7 @@ import com.example.demo.model.Customer;
 import com.example.demo.model.Event;
 import com.example.demo.model.Place;
 import com.example.demo.model.Ticket;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class ConvertToDTO {
 
         if (customer.getTickets() != null) {
             List<TicketDTO> tickets = customer.getTickets().stream()
-                    .map(this::convertTicketToDTO)
+                    .map(this::convertTicketToDTOWithoutEvent)
                     .collect(Collectors.toList());
             customerDTO.setTickets(tickets);
         }
@@ -32,18 +33,28 @@ public class ConvertToDTO {
         return customerDTO;
     }
 
-    private TicketDTO convertTicketToDTO(Ticket ticket) {
+    public TicketDTO convertTicketToDTOWithoutEvent(Ticket ticket) {
         TicketDTO ticketDTO = new TicketDTO();
         ticketDTO.setId(ticket.getId());
         ticketDTO.setCost(ticket.getCost());
         ticketDTO.setNumber(ticket.getNumber());
         ticketDTO.setStatus(ticket.getStatus());
-        ticketDTO.setEvent(convertEventToDTO(ticket.getEvent()));
-        ticketDTO.setCustomer(convertCustomerToDTO(ticket.getCustomer()));
+        // System.out.println(ticket.getEvent());
+        //ticketDTO.setEvent(convertEventToDTO(ticket.getEvent()));
+        //ticketDTO.setCustomer(convertCustomerToDTO(ticket.getCustomer()));
         return ticketDTO;
     }
 
-    private PlaceDTO convertPlaceToDTO(Place place) {
+//    private TicketDTO convertTicketToDTO(Ticket ticket) {
+//        TicketDTO ticketDTO = new TicketDTO();
+//        ticketDTO.setId(ticket.getId());
+//        ticketDTO.setCost(ticket.getCost());
+//        ticketDTO.setNumber(ticket.getNumber());
+//        ticketDTO.setStatus(ticket.getStatus());
+//        return ticketDTO;
+//    }
+
+    public PlaceDTO convertPlaceToDTO(Place place) {
         PlaceDTO placeDTO = new PlaceDTO();
         placeDTO.setId(place.getId());
         placeDTO.setName(place.getName());
@@ -51,7 +62,8 @@ public class ConvertToDTO {
         return placeDTO;
     }
 
-    private EventDTO convertEventToDTO(Event event) {
+    public EventDTO convertEventToDTO(Event event) {
+
         EventDTO eventDTO = new EventDTO();
         eventDTO.setId(event.getId());
         eventDTO.setName(event.getName());
@@ -59,9 +71,10 @@ public class ConvertToDTO {
 
         if (event.getTickets() != null) {
             List<TicketDTO> tickets = event.getTickets().stream()
-                    .map(this::convertTicketToDTO)
+                    .map(this::convertTicketToDTOWithoutEvent)
                     .collect(Collectors.toList());
             eventDTO.setTickets(tickets);
+
         }
 
         eventDTO.setPlace(convertPlaceToDTO(event.getPlace()));
