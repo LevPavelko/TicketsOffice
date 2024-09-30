@@ -25,7 +25,7 @@ public class Customer {
     @Column(name = "phone")
     private int phone;
 
-    @OneToMany
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ticket> tickets;
 
 
