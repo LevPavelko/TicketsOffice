@@ -13,4 +13,9 @@ public class CustomerDTO {
     private String email;
     private int phone;
     private List<TicketDTO> tickets;
+
+    @Override
+    public String toString() {
+        return "CustomerDTO: [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
+    }
 }

@@ -11,5 +11,6 @@ public interface EventServcice {
     void update(EventDTO event);
     void delete(EventDTO event);
     Optional<EventDTO> findById(int id);
+    EventDTO findByName(String name);
     List<EventDTO> findAll();
 }

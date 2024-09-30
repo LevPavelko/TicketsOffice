@@ -48,6 +48,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Optional<CustomerDTO> findByIdWithTickets(int id) {
+        Optional<Customer> customerOpt = customerRepository.findByIdWithTickets(id);
+        return customerOpt.map(convertToDTO::convertCustomerToDTO);
+    }
+
+    @Override
     public Optional<CustomerDTO> findById(int id) {
         Optional<Customer> customerOpt = customerRepository.findById(id);
         return customerOpt.map(convertToDTO::convertCustomerToDTO);

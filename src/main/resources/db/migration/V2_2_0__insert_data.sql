@@ -1,0 +1,1 @@
+INSERT INTO Tickets (cost,number,status,customer_id,event_id) values (60, 6, 'SOLD', 1,1);

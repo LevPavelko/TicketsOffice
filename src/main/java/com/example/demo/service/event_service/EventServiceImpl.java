@@ -55,4 +55,10 @@ public class EventServiceImpl implements EventServcice{
         return event.map(convertToDTO::convertEventToDTO);
 
     }
+
+    @Override
+    public EventDTO findByName(String name) {
+        Event event = eventRepository.findByName(name);
+        return convertToDTO.convertEventToDTO(event);
+    }
 }

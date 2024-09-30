@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5437/TicketsOffice2
+    url: jdbc:postgresql://localhost:5437/TicketOffice
     username: sa
     password: admin
     driverClassName: org.postgresql.Driver
@@ -10,5 +10,5 @@ spring:
     user: sa
     password: admin
     schemas: public
-    url: jdbc:postgresql://localhost:5437/TicketsOffice2
+    url: jdbc:postgresql://localhost:5437/TicketOffice
 

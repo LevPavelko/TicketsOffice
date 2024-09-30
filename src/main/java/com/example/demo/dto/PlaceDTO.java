@@ -12,4 +12,8 @@ public class PlaceDTO {
     private String address;
     private String name;
 
+    @Override
+    public String toString() {
+        return "PlaceDTO [id=" + id + ", address=" + address + ", name=" + name + "]";
+    }
 }

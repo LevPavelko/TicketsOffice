@@ -1,6 +1,7 @@
 package com.example.demo.service.customer_service;
 
 import com.example.demo.dto.CustomerDTO;
+import com.example.demo.dto.TicketDTO;
 import com.example.demo.model.Customer;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public interface CustomerService {
     void save(CustomerDTO customer);
     void update(CustomerDTO customer);
     void delete(CustomerDTO customer);
+    Optional<CustomerDTO> findByIdWithTickets(int id);
     Optional<CustomerDTO> findById(int id);
     List<CustomerDTO> findAll();
 

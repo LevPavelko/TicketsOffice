@@ -22,13 +22,18 @@ public class ConvertToDTO {
         customerDTO.setName(customer.getName());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setPhone(customer.getPhone());
-
-        if (customer.getTickets() != null) {
-            List<TicketDTO> tickets = customer.getTickets().stream()
-                    .map(this::convertTicketToDTOWithoutEvent)
-                    .collect(Collectors.toList());
-            customerDTO.setTickets(tickets);
+        try{
+            if (!customer.getTickets().isEmpty()) {
+                List<TicketDTO> tickets = customer.getTickets().stream()
+                        .map(this::convertTicketToDTOWithoutEvent)
+                        .collect(Collectors.toList());
+                customerDTO.setTickets(tickets);
+            }
         }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
 
         return customerDTO;
     }
