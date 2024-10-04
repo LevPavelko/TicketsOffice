@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventServcice{
 
     @Override
     public List<EventDTO> findAll() {
-        List<Event> event = eventRepository.findAllWithTickets();
+        List<Event> event = eventRepository.findAll();
         return event.stream()
                 .map(convertToDTO::convertEventToDTO)
                 .collect(Collectors.toList());

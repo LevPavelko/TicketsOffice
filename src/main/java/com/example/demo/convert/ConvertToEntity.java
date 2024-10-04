@@ -33,7 +33,6 @@ public class ConvertToEntity {
         return customer;
     } //done
 
-
     public Ticket convertTicketDTOToEntity(TicketDTO ticketDTO) {
         Ticket ticket = new Ticket();
         ticket.setId(ticketDTO.getId());
@@ -51,7 +50,7 @@ public class ConvertToEntity {
 
     public Place convertPlaceDTOToEntity(PlaceDTO placeDTO) {
         Place place = new Place();
-
+        place.setId(placeDTO.getId());
         place.setName(placeDTO.getName());
         place.setAddress(placeDTO.getAddress());
         return place;

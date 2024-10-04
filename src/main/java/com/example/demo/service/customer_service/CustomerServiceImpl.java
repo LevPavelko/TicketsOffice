@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
@@ -49,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<CustomerDTO> findByIdWithTickets(int id) {
-        Optional<Customer> customerOpt = customerRepository.findByIdWithTickets(id);
+        Optional<Customer> customerOpt = customerRepository.findById(id);
         return customerOpt.map(convertToDTO::convertCustomerToDTO);
     }
 
@@ -62,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> findAll() {
 
-        List<Customer> customers = customerRepository.findAllWithTickets();
+        List<Customer> customers = customerRepository.findAll();
         return customers.stream()
                 .map(convertToDTO::convertCustomerToDTO)
                 .collect(Collectors.toList());

@@ -45,7 +45,7 @@ public class ConvertToDTO {
         ticketDTO.setNumber(ticket.getNumber());
         ticketDTO.setStatus(ticket.getStatus());
         // System.out.println(ticket.getEvent());
-        //ticketDTO.setEvent(convertEventToDTO(ticket.getEvent()));
+        ticketDTO.setEvent(convertEventToDTO(ticket.getEvent()));
         //ticketDTO.setCustomer(convertCustomerToDTO(ticket.getCustomer()));
         return ticketDTO;
     }
@@ -73,14 +73,6 @@ public class ConvertToDTO {
         eventDTO.setId(event.getId());
         eventDTO.setName(event.getName());
         eventDTO.setEvent_date(event.getEventDate());
-
-        if (event.getTickets() != null) {
-            List<TicketDTO> tickets = event.getTickets().stream()
-                    .map(this::convertTicketToDTOWithoutEvent)
-                    .collect(Collectors.toList());
-            eventDTO.setTickets(tickets);
-
-        }
 
         eventDTO.setPlace(convertPlaceToDTO(event.getPlace()));
         return eventDTO;

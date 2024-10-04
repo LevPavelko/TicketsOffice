@@ -12,5 +12,5 @@ public interface PlaceService {
     void delete(PlaceDTO place);
     List<PlaceDTO> findAll();
     Optional<PlaceDTO> findById(int id);
-    List<PlaceDTO> findByName(String name);
+    PlaceDTO findByNameAndAddress(String name, String address);
 }

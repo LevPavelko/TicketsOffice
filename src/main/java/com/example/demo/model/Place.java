@@ -1,12 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode
+@ToString
 @Table(name = "Placeses")
 public class Place {
     @Id
