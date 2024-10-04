@@ -1,16 +1,19 @@
 package com.example.demo.menu;
 
-import com.example.demo.dto.CustomerDTO;
-import com.example.demo.dto.EventDTO;
-import com.example.demo.dto.TicketDTO;
+import com.example.demo.dao.ticket.TicketRepository;
+import com.example.demo.dto.*;
 import com.example.demo.model.TicketStatus;
 import com.example.demo.service.customer_service.CustomerService;
 import com.example.demo.service.customer_service.CustomerServiceImpl;
 import com.example.demo.service.event_service.EventServiceImpl;
+import com.example.demo.service.special_service.SpecialService;
 import com.example.demo.service.ticket_service.TicketServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -22,6 +25,8 @@ public class Menu {
     private TicketServiceImpl ticketServiceImpl;
     @Autowired
     private EventServiceImpl eventServiceImpl;
+    @Autowired
+    private SpecialService specialService;
 
 
     public void start(){
@@ -38,6 +43,7 @@ public class Menu {
             System.out.println("7. Delete ticket");
             System.out.println("8. Delete customer");
             System.out.println("9. Update ticket");
+            System.out.println("10. Create event");
             System.out.println("0. Exit");
 
             switch (scanner.nextInt()) {
@@ -177,6 +183,26 @@ public class Menu {
                         System.out.println("Event not found.");
                         break;
                     }
+                case 10:
+                    EventCreationDTO eventCreationDTO = new EventCreationDTO();
+
+                    eventCreationDTO.setName("00000");
+                    eventCreationDTO.setEvent_date(Date.valueOf("2024-06-05"));
+                    PlaceDTO placeDTO = new PlaceDTO();
+                    placeDTO.setName("hzhz");
+                    placeDTO.setAddress("Gasse 2");
+
+                    eventCreationDTO.setPlace(placeDTO);
+
+                    List<TicketPackDTO> list = new ArrayList<>();
+                    TicketPackDTO ticketPackDTO = new TicketPackDTO(30,2);
+                    TicketPackDTO ticketPackDTO2 = new TicketPackDTO(105,3);
+
+                    list.add(ticketPackDTO);
+                    list.add(ticketPackDTO2);
+                    eventCreationDTO.setTickets(list);
+                    specialService.createEvent(eventCreationDTO);
+                    break;
 
 
 
@@ -186,13 +212,7 @@ public class Menu {
 
             }
 
-
-
-
         }
-
-
-
 
     }
 

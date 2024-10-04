@@ -1,11 +1,11 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.TicketStatus;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class TicketDTO {
     private int id;
     private int cost;
@@ -21,6 +21,7 @@ public class TicketDTO {
                 ", cost=" + cost +
                 ", number='" + number + '\'' +
                 ", status='" + status + '\'' +
+                ", event=" + event.toString() +
                 '}';
     }
 }

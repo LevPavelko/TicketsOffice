@@ -55,11 +55,10 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public List<PlaceDTO> findByName(String name) {
-        List<Place> place = placeRepository.findByName(name);
-        return place.stream()
-                .map(convertToDTO::convertPlaceToDTO)
-                .collect(Collectors.toList());
+    public PlaceDTO findByNameAndAddress(String name,String address) {
+        Place place = placeRepository.findByNameAndAddress(name, address);
+        return convertToDTO.convertPlaceToDTO(place);
+
 
     }
 
