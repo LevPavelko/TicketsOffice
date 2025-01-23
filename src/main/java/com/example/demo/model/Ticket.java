@@ -1,7 +1,10 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data

@@ -1,12 +1,12 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
 import java.sql.Date;
 import java.util.List;
 
-
+import javax.persistence.*;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = {"tickets"})

@@ -22,6 +22,8 @@ public class ConvertToDTO {
         customerDTO.setName(customer.getName());
         customerDTO.setEmail(customer.getEmail());
         customerDTO.setPhone(customer.getPhone());
+        customerDTO.setPassword(customer.getPassword());
+        customerDTO.setRole(customer.getRole());
         try{
             if (!customer.getTickets().isEmpty()) {
                 List<TicketDTO> tickets = customer.getTickets().stream()
