@@ -1,6 +1,7 @@
 package com.example.demo.configuration;
 
 import com.example.demo.service.customer_service.CustomerServiceImpl;
+import com.example.demo.utils.CustomAuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -25,16 +26,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomerServiceImpl customerService;
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
         http.authorizeRequests().antMatchers("/css/**").permitAll();
-//        http.authorizeRequests().mvcMatchers("/orders").access("hasAnyRole('ROLE_DISPATCHER')");
-//        http.authorizeRequests().mvcMatchers("/drivers").access("hasAnyRole('ROLE_DISPATCHER')");
-//        http.authorizeRequests().mvcMatchers("/trips").access("hasAnyRole('ROLE_DISPATCHER')");
-//        http.authorizeRequests().mvcMatchers("/addDriver").access("hasAnyRole('ROLE_DISPATCHER')");
-//        http.authorizeRequests().mvcMatchers("/activeTrip").access("hasAnyRole('ROLE_DRIVER')");
+        http.authorizeRequests().mvcMatchers("/myTickets").access("hasAnyRole('ROLE_CUSTOMER')");
+
+
 
 //        http.authorizeRequests()
 //                .mvcMatchers("/login").permitAll()
@@ -45,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
-//                .successHandler(customAuthenticationSuccessHandler)
+               .successHandler(customAuthenticationSuccessHandler)
                 .failureUrl("/login?error=true")
                 .usernameParameter("email")
                 .passwordParameter("password");
@@ -53,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/logoutSuccessful");
+                .logoutSuccessUrl("/");
 
         http.exceptionHandling()
                 .accessDeniedPage("/403");

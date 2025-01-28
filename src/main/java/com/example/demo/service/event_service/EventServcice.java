@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventServcice {
-    void save(EventDTO event);
+    Integer save(EventDTO event);
     void update(EventDTO event);
     void delete(EventDTO event);
     Optional<EventDTO> findById(int id);
     EventDTO findByName(String name);
+    List<EventDTO> findByNameContaining(String name);
     List<EventDTO> findAll();
+    void deleteAll();
 }

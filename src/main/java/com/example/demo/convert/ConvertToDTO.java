@@ -8,7 +8,6 @@ import com.example.demo.model.Customer;
 import com.example.demo.model.Event;
 import com.example.demo.model.Place;
 import com.example.demo.model.Ticket;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class ConvertToDTO {
         try{
             if (!customer.getTickets().isEmpty()) {
                 List<TicketDTO> tickets = customer.getTickets().stream()
-                        .map(this::convertTicketToDTOWithoutEvent)
+                        .map(this::convertTicketToDTO)
                         .collect(Collectors.toList());
                 customerDTO.setTickets(tickets);
             }
@@ -40,7 +39,7 @@ public class ConvertToDTO {
         return customerDTO;
     }
 
-    public TicketDTO convertTicketToDTOWithoutEvent(Ticket ticket) {
+    public TicketDTO convertTicketToDTO(Ticket ticket) {
         TicketDTO ticketDTO = new TicketDTO();
         ticketDTO.setId(ticket.getId());
         ticketDTO.setCost(ticket.getCost());

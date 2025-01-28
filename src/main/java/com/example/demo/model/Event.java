@@ -4,6 +4,7 @@ package com.example.demo.model;
 import lombok.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class Event {
     private int id;
 
     @Column(name = "event_date")
-    private Date eventDate;
+    private LocalDate eventDate;
 
     @Column(name = "name")
     private String name;

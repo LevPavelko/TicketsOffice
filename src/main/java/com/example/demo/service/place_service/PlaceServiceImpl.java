@@ -62,5 +62,8 @@ public class PlaceServiceImpl implements PlaceService {
 
     }
 
-
+    @Override
+    public void deleteAll() {
+        placeRepository.deleteAll();
+    }
 }
