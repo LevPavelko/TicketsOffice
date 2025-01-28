@@ -5,7 +5,7 @@ import com.example.demo.convert.ConvertToEntity;
 import com.example.demo.dao.place.PlaceRepository;
 import com.example.demo.dto.PlaceDTO;
 import com.example.demo.model.Place;
-import jakarta.persistence.Access;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +62,8 @@ public class PlaceServiceImpl implements PlaceService {
 
     }
 
-
+    @Override
+    public void deleteAll() {
+        placeRepository.deleteAll();
+    }
 }

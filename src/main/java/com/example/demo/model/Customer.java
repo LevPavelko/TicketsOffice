@@ -1,10 +1,10 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
 import java.util.List;
-
+import javax.persistence.*;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = {"tickets"})
@@ -24,6 +24,12 @@ public class Customer {
 
     @Column(name = "phone")
     private int phone;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Ticket> tickets;

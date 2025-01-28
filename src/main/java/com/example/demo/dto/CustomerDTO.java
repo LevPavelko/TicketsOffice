@@ -12,6 +12,8 @@ public class CustomerDTO {
     private String name;
     private String email;
     private int phone;
+    private String password;
+    private String role;
     private List<TicketDTO> tickets;
 
     @Override

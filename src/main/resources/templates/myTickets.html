@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Tickets</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/menu.css" th:href="@{/css/menu.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="/css/index.css" th:href="@{/css/index.css}" />
+</head>
+<body>
+<th:block th:include="/menu/menu"></th:block>
+
+
+<div class="items-container">
+    <div th:each="ticket : ${tickets}" class="item-card">
+
+        <div class="item-field"><strong>Event Name:</strong> <span th:utext="${ticket.event.name}"></span></div>
+        <div class="item-field"><strong>Event Date:</strong> <span th:utext="${ticket.event.event_date}"></span></div>
+        <div class="item-field"><strong>Number:</strong> <span th:utext="${ticket.number}"></span></div>
+
+
+
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+  <link rel="stylesheet" type="text/css" media="all" href="/css/menu.css" th:href="@{/css/menu.css}" />
+  <link rel="stylesheet" type="text/css" media="all" href="/css/index.css" th:href="@{/css/index.css}" />
+  <link rel="stylesheet" type="text/css" media="all" href="/css/search.css" th:href="@{/css/search.css}" />
+
+</head>
+<body>
+<th:block th:include="/menu/menu"></th:block>
+
+<div class="center-div">
+    <form method="post" th:action="@{/searchForm}">
+        <input type="text" name="searchInput" placeholder="Enter event name..." th:value="${searchInput}">
+        <input type="submit" value="🔍">
+    </form>
+</div>
+<div class="center-div">
+    <div class="items-container">
+        <div th:each="event : ${events}" class="item-card">
+
+            <div class="item-field"><strong>Name:</strong> <span th:utext="${event.name}"></span></div>
+            <div class="item-field"><strong>Date:</strong> <span th:utext="${event.event_date}"></span></div>
+            <div class="item-field"><strong>Place:</strong> <span th:utext="${event.place.name}"> </span></div>
+            <div class="item-field"><strong>Place Address:</strong> <span th:utext="${event.place.address}"></span></div>
+            <div class="item-field" th:if="${event.ticketPrice != 0}"><strong>Ticket Price:</strong> <span th:utext="${event.ticketPrice}"></span></div>
+
+            <div th:if="${event.ticketPrice != 0}">
+                <a th:href="@{'/buyTicket?eventId=' + ${event.id} }"
+                   style="background-color: #09a305">
+                    Buy Ticket
+                </a>
+
+            </div>
+            <strong th:if="${event.ticketPrice == 0}">SOLD OUT</strong>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

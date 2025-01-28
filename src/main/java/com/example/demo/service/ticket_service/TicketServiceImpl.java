@@ -5,6 +5,7 @@ import com.example.demo.convert.ConvertToEntity;
 import com.example.demo.dao.ticket.TicketRepository;
 import com.example.demo.dto.TicketDTO;
 import com.example.demo.model.Ticket;
+import com.example.demo.model.TicketStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Optional<TicketDTO> findById(int id) {
         Optional<Ticket> ticket = ticketRepository.findById(id);
-        return ticket.map(convertToDTO::convertTicketToDTOWithoutEvent);
+        return ticket.map(convertToDTO::convertTicketToDTO);
         //сомнительный момент вызова convertTicketToDTOWithoutEvent
         //возможно сделать другой метод типо convertTicketToDTO с ивентом кароче
     }
@@ -61,7 +62,7 @@ public class TicketServiceImpl implements TicketService {
         //тоже такой момент сомнительный момент,
         // наверное сделать метод как в customer типо findAllWithEvent
         return tickets.stream()
-                .map(convertToDTO::convertTicketToDTOWithoutEvent) // тоже самое что писал выше в методе findById
+                .map(convertToDTO::convertTicketToDTO) // тоже самое что писал выше в методе findById
                 .collect(Collectors.toList());
     }
 
@@ -70,4 +71,22 @@ public class TicketServiceImpl implements TicketService {
         ticketRepository.deleteById(id);
     }
 
+    @Override
+    public void deleteAll() {
+        ticketRepository.deleteAll();
+    }
+
+    public TicketDTO findFreeTicketByEventId(int eventId) {
+        Ticket ticket = ticketRepository.findFirstByEventIdAndStatus(eventId, TicketStatus.FREE);
+        TicketDTO ticketDTO = convertToDTO.convertTicketToDTO(ticket);
+        return ticketDTO;
+    }
+
+    @Override
+    public List<TicketDTO> findTicketsByCustomer(int customerId) {
+        List<Ticket> tickets = ticketRepository.findByCustomerId(customerId);
+        return tickets.stream()
+                .map(convertToDTO::convertTicketToDTO)
+                .collect(Collectors.toList());
+    }
 }

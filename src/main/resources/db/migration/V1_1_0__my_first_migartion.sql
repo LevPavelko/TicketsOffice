@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS Customer(
     id SERIAL PRIMARY KEY,
     name varchar (30),
     email varchar(30),
-    phone integer
+    phone integer,
+    password varchar(70),
+    role varchar(50)
 );
 
 CREATE TYPE ticket_status AS ENUM ('FREE', 'SOLD');

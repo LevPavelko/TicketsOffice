@@ -13,6 +13,10 @@ public interface TicketService {
     List<TicketDTO> findAll();
     Optional<TicketDTO> findById(int id);
     void deleteById(int id);
+    void deleteAll();
+    TicketDTO findFreeTicketByEventId(int eventId) ;
+    List<TicketDTO> findTicketsByCustomer(int customerId);
+
 
 
 }

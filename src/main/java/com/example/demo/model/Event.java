@@ -1,12 +1,13 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-
+import javax.persistence.*;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = {"tickets"})
@@ -19,7 +20,7 @@ public class Event {
     private int id;
 
     @Column(name = "event_date")
-    private Date eventDate;
+    private LocalDate eventDate;
 
     @Column(name = "name")
     private String name;

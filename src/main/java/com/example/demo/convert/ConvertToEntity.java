@@ -21,7 +21,8 @@ public class ConvertToEntity {
         customer.setName(customerDTO.getName());
         customer.setEmail(customerDTO.getEmail());
         customer.setPhone(customerDTO.getPhone());
-
+        customer.setPassword(customerDTO.getPassword());
+        customer.setRole(customerDTO.getRole());
 //        if (customerDTO.getTickets() != null) {
 //            List<Ticket> tickets = customerDTO.getTickets().stream()
 //                    .map(this::convertTicketDTOToEntity)

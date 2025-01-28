@@ -8,13 +8,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 public class EventDTO {
     private int id;
-    private Date event_date;
+    private LocalDate event_date;
     private String name;
-    private List<TicketDTO> tickets;
     private PlaceDTO place;
+    private int ticketPrice;
 }

@@ -46,7 +46,7 @@ public class SpecialServiceImpl implements SpecialService {
         }
 
         EventDTO event = new EventDTO();
-        event.setEvent_date(eventCreationDTO.getEvent_date());
+        event.setEvent_date(eventCreationDTO.getEvent_date().toLocalDate());
         event.setName(eventCreationDTO.getName());
 
         event.setPlace(createdPlace);

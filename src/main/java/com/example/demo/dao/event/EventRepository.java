@@ -9,4 +9,6 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event,Integer> {
     @Query("SELECT e FROM Event e WHERE e.name = :name ")
     Event findByName(String name);
+
+    List<Event> findByNameContainingIgnoreCase(String name);
 }
