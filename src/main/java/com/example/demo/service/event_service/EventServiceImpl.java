@@ -5,6 +5,7 @@ import com.example.demo.convert.ConvertToEntity;
 import com.example.demo.dao.event.EventRepository;
 import com.example.demo.dao.ticket.TicketRepository;
 import com.example.demo.dto.EventDTO;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.TicketDTO;
 import com.example.demo.model.*;
 import com.example.demo.model.Event;
@@ -39,7 +40,6 @@ public class EventServiceImpl implements EventServcice{
     @Override
     public void update (EventDTO eventDTO) {
         Event event = convertToEntity.convertEventDTOToEntity(eventDTO);
-        eventRepository.save(event);
         eventRepository.save(event);
     }
 
@@ -103,5 +103,14 @@ public class EventServiceImpl implements EventServcice{
         }
 
         return eventsDto;
+    }
+
+    @Override
+    public List<EventDTO> findByPlace(PlaceDTO placeDTO) {
+        Place place = convertToEntity.convertPlaceDTOToEntity(placeDTO);
+        List<Event> events = eventRepository.findByPlace(place);
+        return events.stream()
+                .map(convertToDTO::convertEventToDTO)
+                .collect(Collectors.toList());
     }
 }

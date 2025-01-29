@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Places</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/menu.css" th:href="@{/css/menu.css}" />
+    <link rel="stylesheet" type="text/css" media="all" href="/css/index.css" th:href="@{/css/index.css}" />
+</head>
+<body>
+<th:block th:include="/menu/menu"></th:block>
+<div class="items-container">
+    <div th:each="place : ${places}" class="item-card">
+
+        <div class="item-field"><strong>Name:</strong> <span th:utext="${place.name}"></span></div>
+        <div class="item-field"><strong>Address:</strong> <span th:utext="${place.address}"></span></div>
+
+    </div>
+
+</div>
+</body>
+</html>

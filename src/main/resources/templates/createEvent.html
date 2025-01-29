@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Event</title>
+  <link rel="stylesheet" type="text/css" media="all" href="/css/menu.css" th:href="@{/css/menu.css}" />
+  <link rel="stylesheet" type="text/css" media="all" href="/css/index.css" th:href="@{/css/index.css}" />
+  <link rel="stylesheet" type="text/css" media="all" href="/css/form.css" th:href="@{/css/form.css}" />
+
+</head>
+<body>
+  <th:block th:include="/menu/menu"></th:block>
+  <div class="center-div">
+    <div class="form-container">
+      <h1 id="title">Create Event</h1>
+      <form th:action="@{/createEventForm}" th:object="${event}" method="post" id="survey-form">
+
+        <div th:if="${message}" style="color: red;">
+          <p th:text="${message}"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Event Name:</label>
+          <input type="text" id="name" th:field="*{name}">
+        </div>
+
+        <div class="form-group">
+          <label for="event_date">Event Date:</label>
+          <input type="date" id="event_date" th:field="*{event_date}">
+        </div>
+
+
+        <div class="form-group">
+          <label for="ticketPrice">Ticket Price:</label>
+          <input type="number" id="ticketPrice" th:field="*{ticketPrice}">
+        </div>
+
+        <div class="form-group">
+          <label for="ticketCount">tTicket Count:</label>
+          <input type="number" id="ticketCount" th:field="*{ticketCount}">
+        </div>
+
+        <div class="form-group">
+          <label>Place:</label>
+          <select name="placeId">
+            <option value="" disabled selected>Select a place</option>
+            <option th:each="place : ${places}"
+                    th:value="${place.id}"
+                    th:text="${place.name}">
+            </option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <input type="submit" id="submit"  value="Add Event">
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

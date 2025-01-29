@@ -13,6 +13,7 @@ public interface CustomerService {
     void delete(CustomerDTO customer);
     Optional<CustomerDTO> findByIdWithTickets(int id);
     Optional<CustomerDTO> findById(int id);
+    Optional<CustomerDTO> findByUserId(int id);
     List<CustomerDTO> findAll();
 
 }

@@ -1,13 +1,7 @@
 package com.example.demo.convert;
 
-import com.example.demo.dto.CustomerDTO;
-import com.example.demo.dto.EventDTO;
-import com.example.demo.dto.PlaceDTO;
-import com.example.demo.dto.TicketDTO;
-import com.example.demo.model.Customer;
-import com.example.demo.model.Event;
-import com.example.demo.model.Place;
-import com.example.demo.model.Ticket;
+import com.example.demo.dto.*;
+import com.example.demo.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +12,7 @@ public class ConvertToEntity {
     public Customer convertCustomerToEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setId(customerDTO.getId());
-        customer.setName(customerDTO.getName());
-        customer.setEmail(customerDTO.getEmail());
-        customer.setPhone(customerDTO.getPhone());
-        customer.setPassword(customerDTO.getPassword());
-        customer.setRole(customerDTO.getRole());
+        customer.setUser(convertUserDTOToEntity(customerDTO.getUser()));
 //        if (customerDTO.getTickets() != null) {
 //            List<Ticket> tickets = customerDTO.getTickets().stream()
 //                    .map(this::convertTicketDTOToEntity)
@@ -67,4 +57,29 @@ public class ConvertToEntity {
 
         return event;
     } //done
+
+    public User convertUserDTOToEntity(UserDTO userDTO) {
+        User user = new User();
+        user.setId(userDTO.getId());
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setPhone(userDTO.getPhone());
+        user.setRole(convertUserRoleDTOToEntity(userDTO.getRole()));
+        return user;
+    }
+
+    public UserRole convertUserRoleDTOToEntity(UserRoleDTO userRoleDTO) {
+        UserRole userRole = new UserRole();
+        userRole.setId(userRoleDTO.getId());
+        userRole.setName(userRoleDTO.getName());
+        return userRole;
+    }
+
+    public Admin convertAdminDTOToEntity(AdminDTO adminDTO) {
+        Admin admin = new Admin();
+        admin.setId(adminDTO.getId());
+        admin.setUser(convertUserDTOToEntity(adminDTO.getUser()));
+        return admin;
+    }
 }

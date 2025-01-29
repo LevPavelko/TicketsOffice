@@ -1,7 +1,9 @@
 package com.example.demo.utils;
 
 import com.example.demo.dao.customer.CustomerRepository;
+import com.example.demo.dao.user.UserRepository;
 import com.example.demo.model.Customer;
+import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.security.core.Authentication;
@@ -20,9 +22,12 @@ import java.util.Optional;
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository userRepository;
+
     @Autowired
     private DataSourceTransactionManagerAutoConfiguration dataSourceTransactionManagerAutoConfiguration;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -30,11 +35,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_CUSTOMER"))) {
 
-            Optional<Customer> customerOptional = customerRepository.findByEmail(userDetails.getUsername());
-            Customer customer = customerOptional.get();
-            if (customer != null) {
+            Optional<User> userOptional = userRepository.findByEmail(userDetails.getUsername());
+            Optional<Customer> customerOptional = customerRepository.findByUserId(userOptional.get().getId());
+
+            if (customerOptional != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("customerId", customer.getId());
+                session.setAttribute("customerId", customerOptional.get().getId());
 
             }
 
