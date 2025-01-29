@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class CustomerServiceImpl implements UserDetailsService,CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -80,16 +80,8 @@ public class CustomerServiceImpl implements UserDetailsService,CustomerService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-
-        String roleName = customer.getRole();
-        List<GrantedAuthority> grantList = new ArrayList<>();
-        grantList.add(new SimpleGrantedAuthority(roleName));
-
-//        return new org.springframework.security.core.userdetails.User(customer.getEmail(), customer.getPassword(), grantList);
-        return CustomUserDetails.fromUser(customer);
+    public Optional<CustomerDTO> findByUserId(int id) {
+        Optional<Customer> customerOpt = customerRepository.findByUserId(id);
+        return customerOpt.map(convertToDTO::convertCustomerToDTO);
     }
 }

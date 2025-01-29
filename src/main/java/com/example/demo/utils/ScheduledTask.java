@@ -18,6 +18,6 @@ public class ScheduledTask {
     @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
     public void scheduleTicketOfficeInitialization() throws FileException {
         log.info("Scheduled task triggered");
-//        init.Initialization();
+        //init.Initialization();
     }
 }

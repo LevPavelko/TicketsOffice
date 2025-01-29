@@ -1,6 +1,6 @@
 package com.example.demo.configuration;
 
-import com.example.demo.service.customer_service.CustomerServiceImpl;
+import com.example.demo.service.user_service.UserServiceImpl;
 import com.example.demo.utils.CustomAuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -24,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    private CustomerServiceImpl customerService;
+    private UserServiceImpl userService;
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -35,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/css/**").permitAll();
         http.authorizeRequests().mvcMatchers("/myTickets").access("hasAnyRole('ROLE_CUSTOMER')");
+        http.authorizeRequests().mvcMatchers("/createEvent").access("hasAnyRole('ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/places").access("hasAnyRole('ROLE_ADMIN')");
+        http.authorizeRequests().mvcMatchers("/createPlace").access("hasAnyRole('ROLE_ADMIN')");
 
 
 
@@ -64,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customerService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
 }

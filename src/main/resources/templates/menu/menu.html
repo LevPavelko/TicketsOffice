@@ -7,10 +7,12 @@
       <li><a th:href="@{/search}">Search</a></li>
       <li><a th:href="@{/events}">Events</a></li>
       <li th:if="${#request.isUserInRole('ROLE_CUSTOMER')}"><a th:href="@{/myTickets}">My Tickets</a></li>
+      <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/createEvent}">Create Event</a></li>
+      <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/createPlace}">Create Place</a></li>
+      <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{/places}">Places</a></li>
 
       <li th:if="${#request.isUserInRole('ROLE_CUSTOMER')}"><a th:href="@{/logout}">Logout</a></li>
       <li><a th:href="@{/login}">Login</a></li>
-
 
 
     </ul>

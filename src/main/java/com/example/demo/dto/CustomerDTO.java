@@ -9,15 +9,8 @@ import java.util.List;
 @Data
 public class CustomerDTO {
     private int id;
-    private String name;
-    private String email;
-    private int phone;
-    private String password;
-    private String role;
+   private UserDTO user;
+    private UserRoleDTO role;
     private List<TicketDTO> tickets;
 
-    @Override
-    public String toString() {
-        return "CustomerDTO: [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
-    }
 }

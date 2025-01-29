@@ -1,22 +1,19 @@
 package com.example.demo.model;
 
+import lombok.Data;
 
-import lombok.*;
 import javax.persistence.*;
-@Entity
+
 @Data
-@EqualsAndHashCode
-@ToString
-@Table(name = "Places")
-public class Place {
+@Entity
+@Table(name = "User_Roles")
+public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "address")
-    private String address;
-
     @Column(name = "name")
     private String name;
+
 }

@@ -1,13 +1,7 @@
 package com.example.demo.convert;
 
-import com.example.demo.dto.CustomerDTO;
-import com.example.demo.dto.EventDTO;
-import com.example.demo.dto.PlaceDTO;
-import com.example.demo.dto.TicketDTO;
-import com.example.demo.model.Customer;
-import com.example.demo.model.Event;
-import com.example.demo.model.Place;
-import com.example.demo.model.Ticket;
+import com.example.demo.dto.*;
+import com.example.demo.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +12,7 @@ public class ConvertToDTO {
     public CustomerDTO convertCustomerToDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setId(customer.getId());
-        customerDTO.setName(customer.getName());
-        customerDTO.setEmail(customer.getEmail());
-        customerDTO.setPhone(customer.getPhone());
-        customerDTO.setPassword(customer.getPassword());
-        customerDTO.setRole(customer.getRole());
+        customerDTO.setUser(convertUserToDTO(customer.getUser()));
         try{
             if (!customer.getTickets().isEmpty()) {
                 List<TicketDTO> tickets = customer.getTickets().stream()
@@ -77,5 +67,30 @@ public class ConvertToDTO {
 
         eventDTO.setPlace(convertPlaceToDTO(event.getPlace()));
         return eventDTO;
+    }
+
+    public UserRoleDTO convertUserRoleToDTO(UserRole userRole) {
+        UserRoleDTO userRoleDTO = new UserRoleDTO();
+        userRoleDTO.setId(userRole.getId());
+        userRoleDTO.setName(userRole.getName());
+        return userRoleDTO;
+    }
+
+    public UserDTO convertUserToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setPhone(user.getPhone());
+        userDTO.setRole(convertUserRoleToDTO(user.getRole()));
+        return userDTO;
+    }
+
+    public AdminDTO convertAdminToDTO(Admin admin) {
+        AdminDTO adminDTO = new AdminDTO();
+        adminDTO.setId(admin.getId());
+        adminDTO.setUser(convertUserToDTO(admin.getUser()));
+        return adminDTO;
     }
 }

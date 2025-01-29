@@ -1,6 +1,7 @@
 package com.example.demo.utils;
 
 import com.example.demo.model.Customer;
+import com.example.demo.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -55,9 +56,9 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
-    public static UserDetails fromUser(Customer customer) {
+    public static UserDetails fromUser(User user) {
 
-        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority( customer.getRole()));
-        return new CustomUserDetails(customer.getEmail(), customer.getPassword(), authorities);
+        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority( user.getRole().getName()));
+        return new CustomUserDetails(user.getEmail(), user.getPassword(), authorities);
     }
 }
