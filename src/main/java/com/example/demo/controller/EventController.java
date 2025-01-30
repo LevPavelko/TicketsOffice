@@ -6,6 +6,7 @@ import com.example.demo.dao.ticket.TicketRepository;
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.TicketDTO;
+import com.example.demo.dto.TicketPackDTO;
 import com.example.demo.model.TicketStatus;
 import com.example.demo.service.event_service.EventServiceImpl;
 import com.example.demo.service.place_service.PlaceServiceImpl;
@@ -86,22 +87,28 @@ public class EventController {
         event.setPlace(place.get());
         Integer eventId = eventService.save(event);
         Optional<EventDTO> eventDTO = eventService.findById(eventId);
-        createTickets(event.getTicketCount(), event.getTicketPrice(), eventDTO.get());
+        createTickets(event.getTickets(), eventDTO.get());
 
         return "redirect:/events";
     }
 
-    public void createTickets(int count, int price, EventDTO event) {
+
+
+
+    public void createTickets(List<TicketPackDTO> tickets, EventDTO event) {
 
         int number = 1;
-        for(int i = 0; i < count; i++){
-            TicketDTO ticketDTO = new TicketDTO();
-            ticketDTO.setEvent(event);
-            ticketDTO.setStatus(TicketStatus.FREE);
-            ticketDTO.setNumber(number);
-            ticketDTO.setCost(price);
-            ticketServiceImpl.save(ticketDTO);
-            number++;
+        for(TicketPackDTO ticket : tickets){
+            for(int i = 0; i < ticket.getCount(); i++){
+                TicketDTO ticketDTO = new TicketDTO();
+                ticketDTO.setEvent(event);
+                ticketDTO.setStatus(TicketStatus.FREE);
+                ticketDTO.setNumber(number);
+                ticketDTO.setCost(ticket.getCost());
+                ticketServiceImpl.save(ticketDTO);
+                number++;
+            }
+
         }
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,5 +21,6 @@ public class EventDTO {
     private String name;
     private PlaceDTO place;
     private int ticketPrice;
-    private int ticketCount;
+
+    List<TicketPackDTO> tickets = new ArrayList<>();
 }
