@@ -29,16 +29,14 @@
           <input type="date" id="event_date" th:field="*{event_date}">
         </div>
 
-
         <div class="form-group">
-          <label for="ticketPrice">Ticket Price:</label>
-          <input type="number" id="ticketPrice" th:field="*{ticketPrice}">
+          <label>Enter count of ticket packs:</label>
+          <input type="number" id="countOfTP" name="countOfTP" min="1" onchange="updateTicketPackages()">
         </div>
 
-        <div class="form-group">
-          <label for="ticketCount">tTicket Count:</label>
-          <input type="number" id="ticketCount" th:field="*{ticketCount}">
-        </div>
+        <div id="ticketPackages"></div>
+
+
 
         <div class="form-group">
           <label>Place:</label>
@@ -60,5 +58,6 @@
     </div>
   </div>
 
+  <script src="/js/ticketPack.js" th:src="@{/js/ticketPack.js}"></script>
 </body>
 </html>

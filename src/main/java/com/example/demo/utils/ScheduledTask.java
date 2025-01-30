@@ -15,7 +15,7 @@ public class ScheduledTask {
         this.init = init;
     }
 
-    @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
+    @Scheduled(fixedRate = 24 * 60 * 60 * 1000) //initialization every day
     public void scheduleTicketOfficeInitialization() throws FileException {
         log.info("Scheduled task triggered");
         //init.Initialization();
